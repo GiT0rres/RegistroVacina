@@ -69,26 +69,19 @@ app/
 
 <div align="center">
 
-### 🔐 Login e Cadastro
-
-<img src="./screenshots/login.png" width="230"/>
-<img src="./screenshots/cadastro.png" width="230"/>
-
-<br><br>
-
-### 💉 Gestão de Vacinas
-
-<img src="./screenshots/home.png" width="230"/>
-<img src="./screenshots/adicionar-vacina.png" width="230"/>
-<img src="./screenshots/detalhes.png" width="230"/>
+<img src="screenshots/Login.jpeg" width="220"/>
+<img src="screenshots/Cadastro.jpeg" width="220"/>
+<img src="screenshots/Home.jpeg" width="220"/>
 
 <br><br>
 
-### 📅 Organização e Perfil
+<img src="screenshots/Calendario.jpeg" width="220"/>
+<img src="screenshots/Perfil.jpeg" width="220"/>
+<img src="screenshots/Cadastrar-Vacina.jpeg" width="220"/>
 
-<img src="./screenshots/calendario.png" width="230"/>
-<img src="./screenshots/perfil.png" width="230"/>
-<img src="./screenshots/historico.png" width="230"/>
+<br><br>
+
+<img src="screenshots/Cadastrado.jpeg" width="220"/>
 
 </div>
 
