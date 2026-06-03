@@ -77,7 +77,6 @@ fun CalendarioScreen(navController: NavHostController) {
                 contentAlignment = Alignment.Center
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    // res/drawable/ic_calendario_hero.png
                     Image(
                         painter = painterResource(id = R.drawable.calendario2),
                         contentDescription = "Calendário",

@@ -43,12 +43,10 @@ fun DetalhesVacinaScreen(navController: NavController, vacinaId: Int) {
     var vacina by remember { mutableStateOf<VacinaModel?>(null) }
     var mostrarDialogDelete by remember { mutableStateOf(false) }
 
-    // Carrega vacina do banco pelo id
     LaunchedEffect(vacinaId) {
         vacina = db.getVacinaById(vacinaId)
     }
 
-    // Dialog de confirmação de exclusão
     if (mostrarDialogDelete) {
         AlertDialog(
             onDismissRequest = { mostrarDialogDelete = false },
@@ -138,7 +136,6 @@ fun DetalhesVacinaScreen(navController: NavController, vacinaId: Int) {
 
                 Spacer(modifier = Modifier.height(28.dp))
 
-                // ── Ícone hero ────────────────────────────────────────────
                 Box(
                     modifier = Modifier
                         .size(100.dp)
@@ -198,7 +195,6 @@ fun DetalhesVacinaScreen(navController: NavController, vacinaId: Int) {
                 Spacer(modifier = Modifier.height(20.dp))
             }
         } ?: run {
-            // Vacina não encontrada
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -242,7 +238,6 @@ fun LinhaInfo(
     }
 }
 
-// ── Ícones via painterResource (nomes de imagem mantidos) ─────────────────────
 
 @Composable
 fun IconVacina() {

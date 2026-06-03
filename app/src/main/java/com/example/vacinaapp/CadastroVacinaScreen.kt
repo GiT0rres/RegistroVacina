@@ -266,7 +266,6 @@ fun CadastroVacinaScreen(navController: NavController, vacinaId: Int = -1) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // ── Lote ─────────────────────────────────────────────────
                 FieldLabel("Lote")
                 Spacer(modifier = Modifier.height(6.dp))
                 OutlinedTextField(
@@ -285,7 +284,6 @@ fun CadastroVacinaScreen(navController: NavController, vacinaId: Int = -1) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // ── Local (opcional) ──────────────────────────────────────
                 FieldLabel("Local", opcional = true)
                 Spacer(modifier = Modifier.height(6.dp))
                 OutlinedTextField(
@@ -300,7 +298,7 @@ fun CadastroVacinaScreen(navController: NavController, vacinaId: Int = -1) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // ── Observações (opcional) ────────────────────────────────
+
                 FieldLabel("Observações", opcional = true)
                 Spacer(modifier = Modifier.height(6.dp))
                 Box {

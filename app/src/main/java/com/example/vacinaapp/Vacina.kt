@@ -26,16 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.vacinaapp.VacinaDBHelper
-import com.example.vacinaapp.VacinaModel
 
-// ── Cores do tema ─────────────────────────────────────────────────────────────
 
 private val Teal     = Color(0xFF008B8B)
 private val TealDark = Color(0xFF006D6D)
 private val BgScreen = Color(0xFFF4F8F8)
 
-// ── Tela principal ────────────────────────────────────────────────────────────
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -44,8 +40,11 @@ fun HomeScreen(navController: NavHostController) {
     var searchQuery by remember { mutableStateOf("") }
     var vacinas by remember { mutableStateOf<List<VacinaModel>>(emptyList()) }
 
-    // Carrega dados do banco sempre que a tela é recomposta
-    LaunchedEffect(Unit) {
+    // Recarrega a lista sempre que HomeScreen fica no topo da back-stack.
+    // currentBackStackEntry muda a cada navegação, então vacinas é
+    // sempre atualizado quando o usuário volta de cadastro/detalhes.
+    val backStackEntry = navController.currentBackStackEntry
+    LaunchedEffect(backStackEntry) {
         val db = VacinaDBHelper(context, null)
         vacinas = db.getAllVacinas()
     }
@@ -71,10 +70,9 @@ fun HomeScreen(navController: NavHostController) {
         bottomBar = {
             NavigationBar(containerColor = Color.White) {
 
-                // Vacinas (ativo)
                 NavigationBarItem(
                     selected = true,
-                    onClick = { },
+                    onClick  = { },
                     icon = {
                         Box(
                             modifier = Modifier
@@ -91,33 +89,31 @@ fun HomeScreen(navController: NavHostController) {
                             )
                         }
                     },
-                    label = { Text("Vacinas", fontSize = 11.sp, color = Teal) },
+                    label  = { Text("Vacinas", fontSize = 11.sp, color = Teal) },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = Color.White,
                         selectedTextColor = Teal,
-                        indicatorColor = Color.Transparent
+                        indicatorColor    = Color.Transparent
                     )
                 )
 
-                // Calendário
                 NavigationBarItem(
                     selected = false,
-                    onClick = { navController.navigate("calendario") },
+                    onClick  = { navController.navigate("calendario") },
                     icon = {
                         Icon(Icons.Outlined.DateRange, contentDescription = "Calendário", tint = Color(0xFF999999))
                     },
-                    label = { Text("Calendário", fontSize = 11.sp, color = Color(0xFF999999)) },
+                    label  = { Text("Calendário", fontSize = 11.sp, color = Color(0xFF999999)) },
                     colors = NavigationBarItemDefaults.colors(indicatorColor = Color.Transparent)
                 )
 
-                // Perfil
                 NavigationBarItem(
                     selected = false,
-                    onClick = { navController.navigate("perfil") },
+                    onClick  = { navController.navigate("perfil") },
                     icon = {
                         Icon(Icons.Outlined.Person, contentDescription = "Perfil", tint = Color(0xFF999999))
                     },
-                    label = { Text("Perfil", fontSize = 11.sp, color = Color(0xFF999999)) },
+                    label  = { Text("Perfil", fontSize = 11.sp, color = Color(0xFF999999)) },
                     colors = NavigationBarItemDefaults.colors(indicatorColor = Color.Transparent)
                 )
             }
@@ -131,7 +127,6 @@ fun HomeScreen(navController: NavHostController) {
                 .padding(paddingValues)
         ) {
 
-            // Header teal
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -140,20 +135,18 @@ fun HomeScreen(navController: NavHostController) {
                     .background(Teal)
             )
 
-            // Card principal sobreposto ao header
             Column(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .offset(y = (-40).dp)
             ) {
                 Card(
-                    shape = RoundedCornerShape(20.dp),
+                    shape  = RoundedCornerShape(20.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
 
-                        // Título com ícone de escudo
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_perfil_vacina),
@@ -168,13 +161,26 @@ fun HomeScreen(navController: NavHostController) {
                                 fontSize = 18.sp,
                                 color = TealDark
                             )
+                            Spacer(modifier = Modifier.weight(1f))
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(50))
+                                    .background(Color(0xFFE8F5F5))
+                                    .padding(horizontal = 10.dp, vertical = 3.dp)
+                            ) {
+                                Text(
+                                    text = "${vacinas.size}",
+                                    fontSize = 12.sp,
+                                    color = Teal,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // Campo de busca
                         OutlinedTextField(
-                            value = searchQuery,
+                            value       = searchQuery,
                             onValueChange = { searchQuery = it },
                             leadingIcon = {
                                 Icon(Icons.Default.Search, contentDescription = null, tint = Color(0xFFAAAAAA))
@@ -182,12 +188,12 @@ fun HomeScreen(navController: NavHostController) {
                             placeholder = {
                                 Text("Buscar vacina...", color = Color(0xFFBBBBBB), fontSize = 14.sp)
                             },
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp),
+                            modifier  = Modifier.fillMaxWidth(),
+                            shape     = RoundedCornerShape(16.dp),
                             singleLine = true,
-                            colors = OutlinedTextFieldDefaults.colors(
+                            colors    = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = Color(0xFFDDDDDD),
-                                focusedBorderColor = Teal
+                                focusedBorderColor   = Teal
                             )
                         )
 
@@ -201,14 +207,16 @@ fun HomeScreen(navController: NavHostController) {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = if (searchQuery.isEmpty()) "Nenhuma vacina cadastrada."
-                                    else "Nenhuma vacina encontrada.",
+                                    text = if (searchQuery.isEmpty())
+                                        "Nenhuma vacina cadastrada.\nToque em + para adicionar."
+                                    else
+                                        "Nenhuma vacina encontrada.",
                                     fontSize = 14.sp,
-                                    color = Color(0xFF999999)
+                                    color    = Color(0xFF999999),
+                                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
                                 )
                             }
                         } else {
-                            // Lista de vacinas vindas do banco
                             LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                                 items(vacinasFiltradas) { vacina ->
                                     VacinaCard(vacina = vacina) {
@@ -224,16 +232,15 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
-// ── Card individual de vacina ─────────────────────────────────────────────────
 
 @Composable
 fun VacinaCard(vacina: VacinaModel, onClick: () -> Unit) {
     Card(
-        modifier = Modifier
+        modifier  = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape     = RoundedCornerShape(14.dp),
+        colors    = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Row(
@@ -258,7 +265,12 @@ fun VacinaCard(vacina: VacinaModel, onClick: () -> Unit) {
             Spacer(modifier = Modifier.width(12.dp))
 
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = vacina.nome, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color(0xFF222222))
+                Text(
+                    text = vacina.nome,
+                    fontWeight = FontWeight.Bold,
+                    fontSize   = 14.sp,
+                    color      = Color(0xFF222222)
+                )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(text = "Data: ${vacina.data}", fontSize = 12.sp, color = Color(0xFF666666))
                 Text(text = "Lote: ${vacina.lote}", fontSize = 12.sp, color = Color(0xFF666666))
@@ -267,7 +279,7 @@ fun VacinaCard(vacina: VacinaModel, onClick: () -> Unit) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowRight,
                 contentDescription = null,
-                tint = Color(0xFFCCCCCC),
+                tint     = Color(0xFFCCCCCC),
                 modifier = Modifier.size(22.dp)
             )
         }

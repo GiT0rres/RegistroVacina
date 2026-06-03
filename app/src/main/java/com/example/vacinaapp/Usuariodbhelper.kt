@@ -20,7 +20,6 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         const val COL_FOTO_URI   = "foto_uri"    // ← novo: URI da foto da galeria
     }
 
-    // ── Criação ───────────────────────────────────────────────────────────────
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
@@ -34,7 +33,6 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         """.trimIndent())
     }
 
-    // ── Migração: adiciona coluna foto_uri se vier do banco v1 ────────────────
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 2) {
@@ -42,7 +40,7 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         }
     }
 
-    // ── Insert ────────────────────────────────────────────────────────────────
+
 
     fun addUsuario(nome: String, usuario: String, senha: String): Long {
         val db = writableDatabase
@@ -55,7 +53,7 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         return resultado
     }
 
-    // ── Checks ────────────────────────────────────────────────────────────────
+
 
     fun usuarioExiste(usuario: String): Boolean {
         val db     = readableDatabase
@@ -79,7 +77,7 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         return valido
     }
 
-    // ── Buscar ────────────────────────────────────────────────────────────────
+
 
     fun buscarUsuario(usuario: String): Map<String, String?>? {
         val db     = readableDatabase
@@ -103,7 +101,7 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         }
     }
 
-    // ── Updates ───────────────────────────────────────────────────────────────
+
 
     fun atualizarNome(usuario: String, novoNome: String): Boolean {
         val db = writableDatabase
@@ -138,7 +136,6 @@ class UsuarioDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         return rows > 0
     }
 
-    // ── Update combinado (nome + senha + foto de uma vez) ─────────────────────
 
     fun atualizarPerfil(
         usuario: String,

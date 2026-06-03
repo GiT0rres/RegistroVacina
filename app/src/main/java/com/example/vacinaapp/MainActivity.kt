@@ -63,6 +63,10 @@ fun AppNavigation(navController: NavHostController) {
             PerfilScreen(navController)
         }
 
+        composable("editarPerfil") {
+            EditarPerfilScreen(navController)
+        }
+
         composable("calendario") {
             CalendarioScreen(navController)
         }

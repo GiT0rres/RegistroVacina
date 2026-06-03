@@ -25,7 +25,7 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         onCreate(db)
     }
 
-    // ── INSERT ────────────────────────────────────────────────────────────────
+
 
     fun addVacina(nome: String, data: String, lote: String, local: String, obs: String) {
         val values = ContentValues()
@@ -40,7 +40,6 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    // ── SELECT ALL ────────────────────────────────────────────────────────────
 
     fun getAllVacinas(): List<VacinaModel> {
         val vacinas = mutableListOf<VacinaModel>()
@@ -66,7 +65,7 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return vacinas
     }
 
-    // ── SELECT BY ID ──────────────────────────────────────────────────────────
+
 
     fun getVacinaById(id: Int): VacinaModel? {
         val db = this.readableDatabase
@@ -90,7 +89,7 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return vacina
     }
 
-    // ── UPDATE ────────────────────────────────────────────────────────────────
+
 
     fun updateVacina(id: Int, nome: String, data: String, lote: String, local: String, obs: String) {
         val values = ContentValues()
@@ -105,7 +104,6 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    // ── DELETE ────────────────────────────────────────────────────────────────
 
     fun deleteVacina(id: Int) {
         val db = this.writableDatabase
@@ -113,7 +111,7 @@ class VacinaDBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    // ── Constantes ────────────────────────────────────────────────────────────
+
 
     companion object {
         private val DATABASE_NAME    = "VacinaDB"

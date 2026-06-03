@@ -75,7 +75,7 @@ fun LoginScreen(navController: NavHostController) {
             .background(BgScreen)
     ) {
 
-        // ── Cabeçalho teal ────────────────────────────────────────────────
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -92,29 +92,6 @@ fun LoginScreen(navController: NavHostController) {
         ) {
 
             Spacer(modifier = Modifier.height(52.dp))
-
-            // ── Ícone ─────────────────────────────────────────────────────
-            AnimatedVisibility(
-                visible = visivel,
-                enter = fadeIn() + slideInVertically(initialOffsetY = { -40 })
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(96.dp)
-                        .clip(CircleShape)
-                        .background(Color.White),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_perfil_vacina),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(56.dp),
-                        contentScale = ContentScale.Fit
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             AnimatedVisibility(
                 visible = visivel,
@@ -139,7 +116,7 @@ fun LoginScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            // ── Card formulário ───────────────────────────────────────────
+
             AnimatedVisibility(
                 visible = visivel,
                 enter = fadeIn() + slideInVertically(initialOffsetY = { 60 })
@@ -175,7 +152,7 @@ fun LoginScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(28.dp))
 
-                        // ── Usuário ───────────────────────────────────────
+
                         OutlinedTextField(
                             value = usuario,
                             onValueChange = {
@@ -205,7 +182,6 @@ fun LoginScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Senha ─────────────────────────────────────────
                         OutlinedTextField(
                             value = senha,
                             onValueChange = {
@@ -235,7 +211,6 @@ fun LoginScreen(navController: NavHostController) {
                             )
                         }
 
-                        // ── Erro de credencial ────────────────────────────
                         if (erroCredencial) {
                             Spacer(modifier = Modifier.height(8.dp))
                             Card(
@@ -254,7 +229,7 @@ fun LoginScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(28.dp))
 
-                        // ── Botão Entrar ──────────────────────────────────
+
                         Button(
                             onClick = {
                                 erroUsuario = usuario.isBlank()
@@ -291,7 +266,7 @@ fun LoginScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Link para cadastro ────────────────────────────
+
                         Row(
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically

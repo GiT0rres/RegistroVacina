@@ -36,7 +36,6 @@ import androidx.navigation.NavHostController
 import com.example.vacinaapp.db.UsuarioDBHelper
 import kotlinx.coroutines.delay
 
-// ── Cores ─────────────────────────────────────────────────────────────────────
 
 private val Teal        = Color(0xFF008B8B)
 private val TealDark    = Color(0xFF006D6D)
@@ -44,7 +43,6 @@ private val TealLight   = Color(0xFFE8F5F5)
 private val BgScreen    = Color(0xFFF4F8F8)
 private val BorderColor = Color(0xFFDDDDDD)
 
-// ── Tela de Cadastro ──────────────────────────────────────────────────────────
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,7 +80,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
         unfocusedTrailingIconColor = Color(0xFFAAAAAA)
     )
 
-    // ── Dialog de sucesso ─────────────────────────────────────────────────────
     if (sucessoCadastro) {
         AlertDialog(
             onDismissRequest = {},
@@ -117,7 +114,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
             .background(BgScreen)
     ) {
 
-        // ── Cabeçalho teal com curva ──────────────────────────────────────
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -128,7 +124,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
                 )
         )
 
-        // ── Botão voltar ──────────────────────────────────────────────────
         IconButton(
             onClick = { navController.popBackStack() },
             modifier = Modifier
@@ -146,27 +141,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
         ) {
 
             Spacer(modifier = Modifier.height(48.dp))
-
-            // ── Ícone no círculo branco ───────────────────────────────────
-            AnimatedVisibility(
-                visible = visivel,
-                enter = fadeIn() + slideInVertically(initialOffsetY = { -40 })
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(88.dp)
-                        .clip(CircleShape)
-                        .background(Color.White),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_perfil_vacina),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(52.dp),
-                        contentScale = ContentScale.Fit
-                    )
-                }
-            }
 
             Spacer(modifier = Modifier.height(14.dp))
 
@@ -192,7 +166,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // ── Card do formulário ────────────────────────────────────────
             AnimatedVisibility(
                 visible = visivel,
                 enter = fadeIn() + slideInVertically(initialOffsetY = { 60 })
@@ -230,7 +203,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(24.dp))
 
-                        // ── Nome completo ─────────────────────────────────
                         CampoLabel("Nome completo")
                         Spacer(modifier = Modifier.height(6.dp))
                         OutlinedTextField(
@@ -256,7 +228,7 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Usuário ───────────────────────────────────────
+
                         CampoLabel("Usuário")
                         Spacer(modifier = Modifier.height(6.dp))
                         OutlinedTextField(
@@ -283,7 +255,7 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Senha ─────────────────────────────────────────
+
                         CampoLabel("Senha")
                         Spacer(modifier = Modifier.height(6.dp))
                         OutlinedTextField(
@@ -331,7 +303,7 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Confirmar Senha ───────────────────────────────
+
                         CampoLabel("Confirmar senha")
                         Spacer(modifier = Modifier.height(6.dp))
                         OutlinedTextField(
@@ -379,7 +351,7 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(28.dp))
 
-                        // ── Botão Cadastrar ───────────────────────────────
+
                         Button(
                             onClick = {
                                 var valido = true
@@ -437,7 +409,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // ── Link para login ───────────────────────────────
                         Row(
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
@@ -468,7 +439,6 @@ fun CadastroUsuarioScreen(navController: NavHostController) {
     }
 }
 
-// ── Componentes auxiliares ────────────────────────────────────────────────────
 
 @Composable
 private fun CampoLabel(text: String) {
